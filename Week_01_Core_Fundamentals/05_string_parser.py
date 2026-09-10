@@ -22,7 +22,7 @@ def splitter(s):
         words.append(s[0:pos])
         s = s[pos+1:len(s)]
     words.append(s)
-    return(words, splits)
+    return(words, splits + 1)
 
 if __name__ == "__main__":
     print(splitter(sent))

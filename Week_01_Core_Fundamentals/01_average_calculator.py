@@ -14,10 +14,29 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    pass
+def main(values):
+    x = True
+    while x == True:
+        try:
+            num = int(input())
+        except:
+            print("Input must be an integer")
+        else:
+            values.append(num)
+            if input("Would you like to input another number? Y/N\n").upper() == "N":
+                x = False
+    return(values)
+
+
+def calc_average(values):
+    total = 0
+    for i in range(0,len(values)):
+        total = total + values[i]
+    return(total/len(values))
 
 
 
 if __name__ == "__main__":
-    main()
+    v = []
+    coolList = main(v)
+    print(calc_average(coolList))

@@ -12,12 +12,30 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def main(values):
+    x = True
+    while x == True:
+        try:
+            num = int(input())
+        except:
+            print("Input must be an integer")
+        else:
+            values.append(num)
+            if input("Would you like to input another number? Y/N\n").upper() == "N":
+                x = False
+    return(values)
 
+def find_values(values):
+    minm = values[0]
+    maxm = values[0]
+    for i in range(0,len(values)):
+        if values[i] > maxm:
+            maxm = values[i]
+        if values[i] < minm:
+            minm = values[i]
+    return(str(minm) + ', ' + str(maxm))
 
 if __name__ == "__main__":
-    main()
+    v = []
+    v = main(v)
+    print(find_values(v))

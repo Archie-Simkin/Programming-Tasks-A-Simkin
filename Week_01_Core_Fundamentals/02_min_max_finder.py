@@ -18,7 +18,7 @@ def main(values):
         try:
             num = int(input())
         except:
-            print("Input must be an integer")
+            print("Input must be an integer.")
         else:
             values.append(num)
             if input("Would you like to input another number? Y/N\n").upper() == "N":

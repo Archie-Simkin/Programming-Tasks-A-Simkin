@@ -12,12 +12,29 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def convertC(n):
+    return((n-32)/1.8)
 
+def convertF(n):
+    return((n*1.8)+32)
+
+def convertChoice(value):
+    ch = input("Would you like to convert your value into Celsius or Farenheit? (C or F)\n")
+    if ch.upper() == "C":
+        return(str(convertC(value))+"°C")
+    elif ch.upper() == "F":
+            return(str(convertF(value))+"°F")
+    else:
+        print("Choice not understood, please try again.")
 
 if __name__ == "__main__":
-    main()
+    x = True
+    while x == True:
+        try:
+            num = float(input("What is your value?\n"))
+        except:
+            print("Input must be an number.")
+        else:
+            print(convertChoice(num))
+            if input("Would you like to do another conversion? Y/N\n").upper() == "N":
+                x = False

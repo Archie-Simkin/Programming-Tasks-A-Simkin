@@ -19,8 +19,8 @@ def splitter(s):
     splits = s.count(" ")
     for i in range(splits):
         pos = s.find(' ')
-        words.append(s[0:pos])
-        s = s[pos+1:len(s)]
+        words.append(s[:pos])
+        s = s[pos+1:]
     words.append(s)
     return(words, splits + 1)
 

@@ -31,6 +31,6 @@ def get_grade(score):
 
 if __name__ == "__main__":
     try:
-        print(get_grade(int(input("What is your percentage grade?\n"))))
+        print(get_grade(float(input("What is your percentage grade? (Out of 100)\n"))))
     except:
         print("Grade must be a percentage out of 100.")

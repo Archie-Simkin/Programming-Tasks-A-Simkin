@@ -11,12 +11,32 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def addItems(item,sList):
+    while item.upper() != "DONE":
+        item = input("What item would you like to add to the list?\nEnter 'DONE' if you would not like to add any more.\n")
+        if item.upper() != "DONE":
+            sList.append(item)
+    return(sList)
+
 
 
 if __name__ == "__main__":
-    main()
+    error = True
+    while error == True:
+        try:
+            sList = addItems("",[])
+            for i in range(0, len(sList)):
+                print(str(i+1) + ": " + sList[i])
+            choice = "Y"
+            while choice.upper != "N":
+                choice = input("Edit any items? (Y/N)\n")
+                if choice.upper != "N":
+                    index = int(input("Enter the number of the item you would like to edit.\n")) - 1
+                    sList[index] = input("What would you like to change it to?\n")
+                    for i in range(0, len(sList)):
+                        print(str(i+1) + ": " + sList[i])
+
+        except:
+            print("An error occurred, try again.\n")
+        else:
+            error = False

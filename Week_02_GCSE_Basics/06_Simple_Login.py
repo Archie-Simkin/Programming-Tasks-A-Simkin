@@ -12,12 +12,28 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import os
 
+def login(inputU, inputP):
+    with open(file_path, "r") as f:
+        f.seek(0)
+        correctU = f.readline()
+        correctP = f.readline()
+        if inputU == correctU.strip("\n"):
+            if inputP == correctP:
+                return("C")
+        else:
+            return("W")
 
-if __name__ == "__main__":
-    main()
+for i in range(0,3):
+    current_dir = os.path.dirname(__file__)
+    file_path = os.path.join(current_dir, 'credentials.txt')
+    response = login(input("Enter your username.\n"), input("Enter your password.\n"))
+    if response == "W":
+        if i < 2:
+            print("Incorrect, please try again.")
+        else:
+            print("Incorrect, you are now locked out.")
+    elif response == "C":
+        print("Logging in...")
+        break

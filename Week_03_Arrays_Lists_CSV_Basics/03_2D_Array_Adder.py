@@ -12,12 +12,44 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import random
+
+def initArray(rows, collumns):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(collumns):
+            row.append(chr(random.randint(65,90)))
+        matrix.append(row)#
+    return(matrix)
+
+def choose_action(action):
+    while action.upper() != "NONE":
+        if action.upper() == "VIEW":
+            for i in range(0,r):
+                print(matrix[i])
+        elif action.upper() == "REPLACE":
+            try:
+                inRow = int(input("Enter the row of the item you would like to replace.\n")) - 1
+                inCollumn = int(input("Enter the collumn of the item you would like to replace.\n")) - 1
+                matrix[inRow][inCollumn] = input("Enter what you would like to replace it with.\n")
+
+            except:
+                print("Error, inputs must be an integer.")
+        elif action.upper() == "DELETE":
+            try:
+                inRow = int(input("Enter the row of the item you would like to delete.\n")) - 1
+                inCollumn = int(input("Enter the collumn of the item you would like to delete.\n")) - 1
+                matrix[inRow][inCollumn] = ""
+            except:
+                print("Error, inputs must be an integer.")
+        else:
+            print("Action not recognised, please try again.")
+        action = input("Choose an action: 'view', 'replace', 'delete' or 'none'.\n")
 
 
 if __name__ == "__main__":
-    main()
+    r = 5
+    c = 5
+    matrix = initArray(r,c)
+    choose_action(input("Choose an action: 'view', 'replace', 'delete' or 'none'.\n"))

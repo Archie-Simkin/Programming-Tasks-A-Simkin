@@ -14,12 +14,19 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import csv
 
+def main(name, quest, colour):
+    with open("csvFile.csv", "a") as file:
+        file.write(name + " ")
+        file.write(quest + " ")
+        file.write(colour)
+    with open("csvFile.csv", "r") as file:
+        read = csv.reader(file, delimiter=' ', quotechar='|')
+        for row in read:
+            print(', '.join(row))
 
 if __name__ == "__main__":
-    main()
+    with open("csvFile.csv", "w") as file:
+        file.write("")
+    main(input("What is your name?\n"),input("What is your quest?\n"),input("What is your favourite colour?\n"))

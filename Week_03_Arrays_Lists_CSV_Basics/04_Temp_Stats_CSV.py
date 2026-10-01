@@ -16,12 +16,30 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
-
+def readValues():
+    with open("meantemp_daily_totals.txt", "r") as file:
+        min = 1000
+        max = -1000
+        rep = sum(1 for line in file)
+        file.seek(2)
+        line = "None"
+        avg = 0
+        for i in range(2,rep-1):
+            l = file.readline()
+            l = l.strip("\n")
+            l = l.split()
+            try:
+                l[1] = float(l[1])
+                if min > l[1]:
+                    min = l[1]
+                if max < l[1]:
+                    max = l[1]
+                avg += l[1]
+            except:
+                pass
+        print(min)
+        print(max)
+        print(avg/rep)
 
 if __name__ == "__main__":
-    main()
+    readValues()

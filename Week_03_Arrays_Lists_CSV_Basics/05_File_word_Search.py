@@ -10,12 +10,19 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def countLines(word,fName):
+    counter = 0
+    with open(fName, "r") as file:
+        for line in file:
+            if word in line:
+                counter = counter + 1
+    return(counter)
+
+
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        print(countLines(input("Enter word to search for.\n"),input("Enter file name.\n")))
+    except:
+        print("File name not found.")

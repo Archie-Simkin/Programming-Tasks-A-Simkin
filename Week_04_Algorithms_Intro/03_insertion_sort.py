@@ -11,13 +11,29 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import random
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def initArray(items):
+    uList = []
+    sList = []
+    for i in range(items):
+        uList.append(random.randint(1,25))
+        sList.append("")
+    return(uList,sList)
 
+def insertSort(uList,sList):
+    for i in range(len(uList)):
+        lower = 0
+        pointer = 0
+        for j in range(len(uList)):
+            if uList[i] > uList[j]:
+                lower += 1
+        while sList[lower - pointer] != "":
+            pointer += 1
+        sList[lower - pointer] = uList[i]
+    return(sList)
 
 if __name__ == "__main__":
-    main()
+    u,s = initArray(12)
+    print(u)
+    print(insertSort(u, s))

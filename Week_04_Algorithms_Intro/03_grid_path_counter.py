@@ -29,18 +29,20 @@ def rPath(row,col):
     return(rPath(row-1,col) + rPath(row,col-1))
 
 def iPath(row,col):
-    paths = [0] * col
-    paths[0] = 1
-    for i in range(row):
-# paths[j] stores the number of paths to reach the current cell in the current row, i. 
-# paths[0] stays as 1, since there's always only 1 way to reach the elements in the 1st collumn.
-        for j in range(1, col):
-            paths[j] += paths[j-1]
-    return(paths[col-1])
+    rFactorial = 1
+    cFactorial = 1
+    tFactorial = 1
+    for i in range(row - 1):
+        rFactorial *= (i + 1)
+    for i in range(col - 1):
+        cFactorial *= (i + 1)
+    for i in range(row + col - 2):
+        tFactorial *= (i + 1)
+    return(tFactorial//(rFactorial*cFactorial))
 
 if __name__ == "__main__":
-    r = 5
-    c = 5
+    r = 12
+    c = 12
     grid = initArray(r % 16, c % 16)
     print(grid)
 

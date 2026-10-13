@@ -12,13 +12,59 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import re
+import string
+from collections import Counter
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def formatLine(line):
+    line = line.strip("\n")
+    line = line.strip()
+    return(line)
+
+def countWords(line):
+    words = line.split()
+    if words != "":
+        return(len(words) + 1)
+    else:
+        return(0)
+
+def countChars(line):
+    words = line.split()
+    totChars = 0
+    for i in range(len(words)):
+        words[i] = re.sub(r'[^a-zA-Z]', '', words[i])
+        totChars += len(words[i])
+    return(totChars)
+
+def mostFrequentWord(file):
+    file.seek(0)
+    content = file.read().lower()
+
+    translator = str.maketrans('', '', string.punctuation)
+    clean_content = content.translate(translator)
+
+    words = clean_content.split()
+    word_counts = Counter(words)
+
+    if word_counts:
+        return word_counts.most_common(1)[0]
+    return("Could not find most common word.")
+
+def readFile(fileName):
+    lineTot = 0
+    wordTot = 0
+    charTot = 0
+    with open(fileName, "r") as file:
+        for line in file:
+            currentLine = formatLine(file.readline())
+            lineTot += 2
+            wordTot += countWords(currentLine)
+            charTot += countChars(currentLine)
+        print(lineTot)
+        print(wordTot)
+        print(charTot)
+        print(mostFrequentWord(file))
 
 
 if __name__ == "__main__":
-    main()
+    readFile("cano.txt")

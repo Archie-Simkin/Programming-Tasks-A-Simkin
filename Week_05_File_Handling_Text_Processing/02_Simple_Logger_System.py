@@ -11,13 +11,38 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import datetime
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def addLog(filename):
+    with open(filename, "a") as file:
+        timestamp = str(datetime.datetime.now())
+        log = input("Enter log\n")
+        log = timestamp[:16].replace("-", "/") + ": " + log + "\n"
+        file.write(log)
+        return(log)
 
+def viewLog(filename):
+    with open(filename, "r") as file:
+        content = file.read()
+        return(content.strip("\n"))
+
+def clearLog(filename):
+    with open(filename, "w") as file:
+        file.write("")
+        return("Cleared logs.")
+
+def menu(action):
+    filename = "logs.txt"
+    while action.upper() != "NONE":
+        if action.upper() == "ADD":
+            print(addLog(filename))
+        elif action.upper() == "VIEW":
+            print(viewLog(filename))
+        elif action.upper() == "CLEAR":
+            print(clearLog(filename))
+        else:
+            print("Action not recognised, please try again.")
+        action = input("Choose an action: 'add', 'view', 'clear' or 'none'.\n")
 
 if __name__ == "__main__":
-    main()
+    menu(input("Choose an action: 'add', 'view', 'clear' or 'none'.\n"))

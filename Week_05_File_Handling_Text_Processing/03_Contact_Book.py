@@ -13,12 +13,46 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def addContact(filename):
+    name = input("Enter name.\n")
+    phoneNum = input("Enter phone number.\n")
+    email = input("Enter email.\n")
+    with open(filename, "a") as file:
+        file.write(name+","+phoneNum+","+email+"\n")
 
+def viewContact(filename):
+    with open(filename, "r") as file:
+        content = file.read()
+        return(content.strip("\n"))
+
+def searchContact(filename, name):
+    with open(filename, "r") as file:
+        for line in file:
+            details = line.split(",")
+            details[2] = details[2].strip("\n")
+            name = name.replace(" ", "")
+            details[0] = details[0].replace(" ", "")
+            if details[0].upper() == name.upper():
+                return(details[1],details[2])
+        return(-1, -1)
+
+
+def menu(action):
+    filename = "contacts.txt"
+    while action.upper() != "NONE":
+        if action.upper() == "ADD":
+            print(addContact(filename))
+        elif action.upper() == "VIEW":
+            print(viewContact(filename))
+        elif action.upper() == "SEARCH":
+            phoneNum, email = searchContact(filename, input("Enter a name to search for.\n"))
+            if phoneNum != -1:
+                print("Phone number: " + phoneNum + "\nEmail: " + email)
+            else:
+                print("Not found")
+        else:
+            print("Action not recognised, please try again.")
+        action = input("Choose an action: 'add', 'view', 'search' or 'none'.\n")
 
 if __name__ == "__main__":
-    main()
+    menu(input("Choose an action: 'add', 'view', 'search' or 'none'.\n"))

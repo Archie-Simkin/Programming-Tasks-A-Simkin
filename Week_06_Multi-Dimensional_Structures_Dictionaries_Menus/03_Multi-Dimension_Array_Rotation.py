@@ -9,12 +9,36 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import random
+
+def initArray(rows, collumns):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(collumns):
+            row.append(2*i + j)
+        matrix.append(row)
+    return(matrix)
+
+def printGrid(matrix):
+    for i in range(len(matrix)):
+        print(matrix[i])
+
+def rotate(m, n, matrix):
+    rotation = initArray(m,n)
+    for i in range(n):
+        for j in range(m):
+            rotation[j][-i-1] = matrix[i][j]
+    return(rotation)
 
 
 if __name__ == "__main__":
-    main()
+    m = 5
+    n = 5
+    grid = initArray(m,n)
+    print("Original grid:")
+    printGrid(grid)
+    rGrid = rotate(m,n,grid)
+    print("Rotated grid:")
+    printGrid(rGrid)
+

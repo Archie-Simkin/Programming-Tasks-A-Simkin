@@ -11,12 +11,37 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def initArray(rows, collumns):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(collumns):
+            row.append(0)
+        matrix.append(row)
+    return(matrix)
+
+def printGrid(matrix):
+    for i in range(len(matrix)):
+        print(matrix[i])
+
+def paint(x, y, value, matrix):
+    matrix[y - 1][x - 1] = value
+    return(matrix)
+
 
 
 if __name__ == "__main__":
-    main()
+    m = 8
+    n = 8
+    grid = initArray(m,n)
+    printGrid(grid)
+    while True:
+        try:
+            x = int(input("Enter collumn number of item you would like to edit. (1 to " + str(n) + ")\n"))
+            y = int(input("Enter row number of item you would like to edit. (1 to " + str(n) + ")\n"))
+        except:
+            print("Input must be an integer.")
+        else:
+            grid = paint(x, y, input("Enter something into the grid.\n"), grid)
+            printGrid(grid)
+

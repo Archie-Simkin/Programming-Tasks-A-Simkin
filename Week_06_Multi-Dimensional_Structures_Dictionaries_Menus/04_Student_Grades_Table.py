@@ -16,12 +16,46 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import datetime
+
+grades = {
+    "Alice": [95, 42, 78],
+    "Bob": [34, 88, 91],
+    "Charlie": [99, 97, 93],
+    "David": [12, 75, 56],
+    "Emma": [92, 23, 96],
+    "Frank": [77, 81, 19],
+    "Grace": [48, 94, 90],
+    "Harry": [65, 31, 73],
+    "Isabella": [100, 85, 38],
+    "Jack": [29, 83, 87]
+}
+
+def calcAverage(dict1, grades):
+    totals = [0] * grades
+    for i in dict1:
+        results = dict1[i]
+        for j in range(len(results)):
+            totals[j] += results[j]
+    for k in range(len(totals)):
+        totals[k] /= len(dict1)
+    return(totals)
+
+def addStudent(dict1, grades):
+    name = input("Enter name of student to add.\n")
+    results = [0] * grades
+    for i in range(grades):
+        results[i] = int(input("Enter grade.\n"))
+    dict1[name] = results
+    return(dict1)
+
+def removeStudent(dict1, grades):
+    name = input("Enter name of student to remove.\n").lower()
+    try:
+        dict1.pop(name.capitalize())
+    except:
+        print("Student not found.")
+    return(dict1)
 
 
-if __name__ == "__main__":
-    main()
+print(removeStudent(grades, 3))

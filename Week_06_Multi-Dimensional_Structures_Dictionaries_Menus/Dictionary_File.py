@@ -45,6 +45,3 @@ furniture_stock = {
     "Cupboard": {"price": 220.00, "quantity": 7, "delivery_date": "2025-03-04"},
     "Stool": {"price": 20.00, "quantity": 45, "delivery_date": "2025-02-28"}
 }
-
-print("Supermarket Stock:\n", supermarket_stock)
-print("\nFurniture Stock:\n", furniture_stock)

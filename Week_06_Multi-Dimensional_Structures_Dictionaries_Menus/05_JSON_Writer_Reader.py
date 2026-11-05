@@ -34,6 +34,17 @@ def inputData(filename, dict1):
     content = json.dumps(dict1, indent=4)
     with open(filename, "w") as file:
         file.write(content)
+        return(calcAverage(dict1))
+
+def calcAverage(dict1):
+    totalStock = 0
+    totalPrice = 0
+    for i in dict1:
+        details = dict1[i]
+        keys = list(dict1[i].keys())
+        totalPrice = details[keys[0]]
+        totalStock = details[keys[1]]
+    return(totalStock / len(dict1), totalPrice / len(dict1))
 
 def readJSON(filename):
     with open(filename, "r") as file:
@@ -43,4 +54,5 @@ def readJSON(filename):
 
 data = readJSON(fName)
 
-inputData(fName, data)
+avgStock, avgPrice = inputData(fName, data)
+print("Average price: " + str(avgPrice) + "\nAverage stock: " + str(avgStock))

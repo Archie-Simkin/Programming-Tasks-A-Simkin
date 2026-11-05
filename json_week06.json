@@ -14,5 +14,13 @@
     "Pringles": {
         "price": 0.8,
         "quantity": 28
+    },
+    "Water bottle": {
+        "price": 1.5,
+        "quantity": 60
+    },
+    "Cat food": {
+        "price": 8.0,
+        "quantity": 25
     }
 }

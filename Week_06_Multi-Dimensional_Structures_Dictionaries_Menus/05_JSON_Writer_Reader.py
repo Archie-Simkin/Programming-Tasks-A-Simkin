@@ -14,12 +14,33 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import json
+
+fName = "json_week06.json"
+
+def inputData(filename, dict1):
+    while True:
+        try:
+            name = input("Enter name of item.\n")
+            price = float(input("Enter price.\n"))
+            quantity = int(input("Enter quantity.\n"))
+            dict1[name] = {"price": price, "quantity": quantity}
+            print(dict1)
+            option = input("(A) Append to data more\nOR\n(B) Write to file\n")
+            if option.upper() == "B":
+                break
+        except:
+            print("Wrong data type, please re-enter.")
+    content = json.dumps(dict1, indent=4)
+    with open(filename, "w") as file:
+        file.write(content)
+
+def readJSON(filename):
+    with open(filename, "r") as file:
+        dict1 = json.load(file)
+        return(dict1)
 
 
-if __name__ == "__main__":
-    main()
+data = readJSON(fName)
+
+inputData(fName, data)

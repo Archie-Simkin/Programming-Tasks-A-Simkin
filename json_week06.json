@@ -1,0 +1,18 @@
+{
+    "Cheese": {
+        "price": 4.0,
+        "quantity": 65
+    },
+    "Beetroot": {
+        "price": 2.0,
+        "quantity": 16
+    },
+    "Horse meat": {
+        "price": 32.0,
+        "quantity": 4
+    },
+    "Pringles": {
+        "price": 0.8,
+        "quantity": 28
+    }
+}

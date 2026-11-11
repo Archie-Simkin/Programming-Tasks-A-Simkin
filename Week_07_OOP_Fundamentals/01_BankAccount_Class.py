@@ -17,12 +17,62 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+class BankAccount:
+    def __init__(self,owner,balance):
+        self.owner = owner
+        self.balance = balance
+        self.log = []
+
+    def deposit(self):
+        try:
+            value = abs(float(input("How much would you like to deposit.\n")))
+            self.balance += value
+            self.log.append("Deposited £" + str(value) + " into account.")
+        except:
+            print("Input must be a number.")
+
+    def withdraw(self):
+        try:
+            value = abs(float(input("How much would you like to withdraw?\n")))
+            self.balance -= value
+            self.log.append("Withdrew £" + str(value) + " from account.")
+        except:
+            print("Input must be a number.")
+
+    def getBalance(self):
+        print("Your balance is £" + str(self.balance))
+
+    def getLog(self):
+        print("Transaction log:")
+        for i in range(len(self.log)):
+            print(self.log[i])
+
+def inputData():
+    name = input("Enter name.\n")
+    while True:
+        try:
+            balance = float(input("Enter balance.\n"))
+            break
+        except:
+            print("Input must be a number.")
+    account = BankAccount(name, balance)
+    return(account)
+
+
+def menu(account, action):
+    while action.upper() != "NONE":
+        if action.upper() == "DEPOSIT":
+            account.deposit()
+        elif action.upper() == "WITHDRAW":
+            account.withdraw()
+        elif action.upper() == "GET BALANCE":
+            account.getBalance()
+        elif action.upper() == "GET LOG":
+            account.getLog()
+        else:
+            print("Action not recognised, please try again.")
+        action = input("Choose an action: 'deposit', 'withdraw', 'get balance', 'get log' or 'none'.\n")
 
 
 if __name__ == "__main__":
-    main()
+    menu(inputData(), input("Choose an action: 'deposit', 'withdraw', 'get balance', 'get log' or 'none'.\n"),)

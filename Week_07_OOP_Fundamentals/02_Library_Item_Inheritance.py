@@ -14,12 +14,44 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
+class Item:
+    def __init__(self,t,y):
+        self._title = t
+        self._year = y
+
+class Book(Item):
     pass
 
+    def details(self):
+        print("Type - Book, Title - " + self._title + ", Year - " + self._year)
+
+class DVD(Item):
+    pass
+
+    def details(self):
+        print("Type - DVD, Title - " + self._title + ", Year - " + self._year)
+
+def registerItems():
+    newItem = input("Enter 'DVD', 'BOOK' or 'NONE' to register an item.\n")
+    items = []
+    while newItem.upper() != "NONE":
+        if newItem.upper() == "DVD":
+            title = input("Enter title.\n")
+            year = input("Enter year.\n")
+            items.append(DVD(title,year))
+        elif newItem.upper() == "BOOK":
+            title = input("Enter title.\n")
+            year = input("Enter year.\n")
+            items.append(Book(title,year))
+        else:
+            print("Action not recognised, please try again.")
+        newItem = input("Enter 'DVD', 'BOOK' or 'NONE' to register an item.\n")
+    return(items)
+
+def readInfo(items):
+    for i in range(len(items)):
+        currentI = items[i]
+        currentI.details()
 
 if __name__ == "__main__":
-    main()
+    readInfo(registerItems())

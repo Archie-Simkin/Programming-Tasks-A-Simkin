@@ -15,12 +15,52 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        try:
+            return(self.queue.pop(0))
+        except:
+            return("Queue is empty.")
+
+    def isEmpty(self):
+        if len(self.queue) == 0:
+            return(True)
+        return(False)
+
+    def peek(self):
+        try:
+            return(self.queue[0])
+        except:
+            return("Queue is empty.")
+
+    def size(self):
+        return(len(self.queue))
+
+
+def choose_action(action):
+    queue = Queue()
+    while action.upper() != "NONE":
+        if action.upper() == "ENQUEUE":
+            queue.enqueue(input("What would you like to enter into the queue?\n"))
+        elif action.upper() == "DEQUEUE":
+            queue.dequeue()
+        elif action.upper() == "PEEK":
+            print("First item in queue is " + str(queue.peek()))
+        elif action.upper() == "SIZE":
+            print("Length of queue is " + str(queue.size()))
+        elif action.upper() == "IS EMPTY":
+            print(queue.isEmpty())
+        else:
+            print("Action not recognised, please try again.")
+
+        action = input("Choose an action: 'enqueue', 'dequeue', 'peek', 'size', 'is empty' or 'none'.\n")
 
 
 if __name__ == "__main__":
-    main()
+    choose_action(input("Choose an action: 'enqueue', 'dequeue', 'peek', 'size', 'is empty' or 'none'.\n"))

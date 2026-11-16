@@ -11,13 +11,40 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import csv
+import statistics
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def csvRead(filename):
+    data = []
+    with open(filename, "r") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            data.append(row)
+    return(data)
+
+def analyseData(data):
+    highest = -1
+    highestIndex = -1
+    total = 0
+    categories = []
+    for i in range(len(data)):
+        if float(data[i][2]) > highest:
+            highest = float(data[i][2])
+            highestIndex = i
+        total += float(data[i][2])
+        categories.append(data[i][1])
+    mostCommon = statistics.mode(categories)
+    return(
+    highest,
+    data[highestIndex][0],
+    round(total/len(data)*100)/100,
+    mostCommon
+    )
+
 
 
 if __name__ == "__main__":
-    main()
+    highest, category, mean, mostCommon = analyseData(csvRead("week8_02_products.csv"))
+    print("Highest priced product: " + category + " - " + str(highest))
+    print("Average price: " + str(mean))
+    print("Most common category: " + mostCommon)

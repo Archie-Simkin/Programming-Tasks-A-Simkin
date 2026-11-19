@@ -12,13 +12,35 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import sqlite3
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def createTable():
+    connect = sqlite3.connect(':memory:')
+    cursor = connect.cursor()
+    cursor.execute('CREATE TABLE mathsStudents (name TEXT, age INTEGER, grade TEXT)')
+    connect.commit()
+    return(connect, cursor)
 
+def insertRecords(connect, cursor):
+    while True:
+        name = input("Enter student name.\n")
+        while True:
+            try:
+                age = int(input("Enter student age.\n"))
+                break
+            except:
+                print("Age must be an integer.")
+        grade = input("Enter student grade.\n")
+        sql = "INSERT INTO mathsStudents (name, age, grade) VALUES (?, ?, ?)"
+        cursor.execute(sql, (name, age, grade))
+        connect.commit
+        if input("Add another student? Y/N\n").upper() == "N":
+            break
+    return(connect, cursor)
 
 if __name__ == "__main__":
-    main()
+    connect, cursor = createTable()
+    insertRecords(connect,cursor)
+    cursor.execute('SELECT * FROM mathsStudents')
+    for row in cursor.fetchall():
+        print("Student: " + row[0] + ", " + str(row[1]) + "      Grade: " + row[2])

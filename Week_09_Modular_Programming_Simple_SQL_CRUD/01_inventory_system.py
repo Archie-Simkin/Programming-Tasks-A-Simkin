@@ -13,12 +13,45 @@ TODO:
 - Add demonstration code under `if __name__ == "__main__":`
 """
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+import sqlite3
+import csv
 
+def createTable():
+    con = sqlite3.connect('inventory.db')
+    cursor = con.cursor()
+    cursor.execute('CREATE TABLE IF NOT EXISTS inventory (name TEXT, price FLOAT, stock INTEGER)')
+    con.commit()
+    return(con, cursor)
+
+def insertRecord(con, cursor, name, price, stock):
+    command = "INSERT INTO inventory (name, price, stock) VALUES (?, ?, ?)"
+    cursor.execute(command, (name, price, stock))
+    con.commit()
+
+def calcAverage(cursor):
+    totalPrice = 0
+    totalStock = 0
+    counter = 0
+    for row in cursor.execute("SELECT * FROM inventory"):
+        totalPrice += row[1]
+        totalStock += row[2]
+        counter += 1
+    return(totalPrice/counter, totalStock/counter)
+
+def displayData(cursor):
+    for row in cursor.execute("SELECT * FROM inventory"):
+        print(row)
+
+def saveFile(cursor, filename):
+    cursor.execute("SELECT * FROM inventory")
+    data = cursor.fetchall()
+    with open(filename, "w", newline="") as file:
+        writer = csv.writer(file)
+        for row in data:
+            writer.writerow(row)
 
 if __name__ == "__main__":
-    main()
+    con, cursor = createTable()
+    displayData(cursor)
+    print(calcAverage(cursor))
+    saveFile(cursor, "week9_02.csv")

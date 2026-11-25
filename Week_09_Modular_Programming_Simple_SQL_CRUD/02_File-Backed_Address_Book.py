@@ -13,13 +13,38 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import json
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+filename = "week9_02_contacts.json"
+with open(filename, "r") as file:
+    contacts = json.load(file)
 
+def addContact():
+    while True:
+        try:
+            name = input("Enter name of person to add.\n")
+            email = input("Enter email.\n")
+            phoneNum = input("Enter phone number.\n")
+            contacts[name] = {"email": email, "phoneNumber": phoneNum}
+            break
+        except:
+            print("Error, please try again.")
+
+def removeContact():
+    name = input("Enter name of person to remove.\n")
+    contacts.pop(name)
+
+def updateJSON(filename):
+    with open(filename, "w") as file:
+        file.write(json.dumps(contacts, indent=4))
+
+def showAll():
+    for row in contacts:
+        data = contacts[row]
+        keys = list(contacts[row].keys())
+        print(f"{row} - Email: {data[keys[0]]}    Phone Number: {data[keys[1]]}")
 
 if __name__ == "__main__":
-    main()
+    addContact()
+    updateJSON(filename)
+    showAll()

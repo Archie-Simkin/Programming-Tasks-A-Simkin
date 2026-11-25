@@ -54,4 +54,4 @@ if __name__ == "__main__":
     con, cursor = createTable()
     displayData(cursor)
     print(calcAverage(cursor))
-    saveFile(cursor, "week9_02.csv")
+    saveFile(cursor, "week9_01.csv")

@@ -14,13 +14,30 @@ TODO:
 - Fill in functions
 - Add demonstration code under `if __name__ == "__main__":`
 """
+import sqlite3
 
-def main():
-    # TODO: Write demonstration/testing code
-    # If you want to delete all the code here and work just with a blank file go ahead, remember anything under the if __name__=="__main__":
-    # will only run if this module is being run directly. So used this subprocedure to carry out testing if it is going to be an imported file.
-    pass
+def createTable():
+    con = sqlite3.connect('week9_03.db')
+    cursor = con.cursor()
+    cursor.execute('CREATE TABLE IF NOT EXISTS students (name TEXT, id TEXT, score INTEGER)')
+    return(con, cursor)
 
+def insertData(cursor, name, id, score):
+    command = "INSERT INTO students (name, id, score) VALUES (?, ?, ?)"
+    cursor.execute(command, (name, id, score))
+
+def deleteData(cursor, id):
+    command = "DELETE FROM students WHERE id = ?"
+    cursor.execute(command, (id,))
+
+def updateTable(con):
+    con.commit()
+
+def selectData(cursor, id):
+    command = "SELECT * FROM students WHERE id = ?"
+    cursor.execute(command, (id,))
+    return(cursor.fetchall())
 
 if __name__ == "__main__":
-    main()
+    con, cursor = createTable()
+    print(selectData(cursor, "G18F"))
